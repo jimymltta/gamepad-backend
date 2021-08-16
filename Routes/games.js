@@ -20,7 +20,7 @@ router.get("/games", async (req, res) => {
 router.get("/games/:id", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games/${req.params.id}?${process.env.API_KEY}`
+      `https://api.rawg.io/api/games/${req.params.id}?key=${process.env.API_KEY}`
     );
     res.status(200).json(response.data);
   } catch (error) {

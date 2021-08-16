@@ -13,6 +13,8 @@ app.use(cors());
 // ROUTES IMPORTS
 const gamesRoute = require("./Routes/games");
 app.use(gamesRoute);
+const usersRoute = require("./Routes/users");
+app.use(usersRoute);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to RAWG API! 🎮" });
