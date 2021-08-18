@@ -9,6 +9,13 @@ const app = express();
 app.use(cors());
 
 // TODO : Database connexion
+const mongooseConnect = async () => {
+  await mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  });
+};
 
 // ROUTES IMPORTS
 const gamesRoute = require("./Routes/games");
@@ -26,6 +33,6 @@ app.all("*", (req, res) => {
 });
 
 // LISTEN TO A PORT (4000)
-app.listen(4000, () => {
+app.listen(process.env.PORT, () => {
   console.log("⚡️ Server started! ⚡️");
 });
