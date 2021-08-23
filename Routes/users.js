@@ -8,6 +8,7 @@ const encBase64 = require("crypto-js/enc-base64");
 
 // MODEL IMPORT
 const User = require("../models/User");
+const isAuthenticated = require("../middlewares/isAuthenticated");
 
 // ROUTE 1 => SIGN UP
 router.post("/user/signup", async (req, res) => {
