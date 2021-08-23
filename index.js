@@ -17,6 +17,7 @@ const mongooseConnect = async () => {
     useCreateIndex: true,
   });
 };
+mongooseConnect();
 
 // ROUTES IMPORTS
 const gamesRoute = require("./Routes/games");

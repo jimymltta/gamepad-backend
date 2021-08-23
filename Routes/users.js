@@ -13,7 +13,6 @@ const isAuthenticated = require("../middlewares/isAuthenticated");
 // ROUTE 1 => SIGN UP
 router.post("/user/signup", async (req, res) => {
   try {
-    console.log(req.fields);
     // Verifying if the email doesn't already exists in the DB
     const user = await User.findOne({ email: req.fields.email });
 
