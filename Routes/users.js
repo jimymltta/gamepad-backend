@@ -27,7 +27,7 @@ router.post("/user/signup", async (req, res) => {
       console.log("HASH ==>", hash);
 
       // TOKEN GENERATION
-      const token = uid(64);
+      const token = uid2(64);
       console.log("TOKEN ==>", token);
 
       // USER CREATION
