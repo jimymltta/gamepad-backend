@@ -1,11 +1,13 @@
 // PACKAGES IMPORTS
 const express = require("express");
+const formidable = require("express-formidable");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
 // SERVER'S INITIALIZATION
 const app = express();
+app.use(formidable());
 app.use(cors());
 
 const mongooseConnect = async () => {
