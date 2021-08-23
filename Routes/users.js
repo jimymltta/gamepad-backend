@@ -41,7 +41,7 @@ router.post("/user/signup", async (req, res) => {
         salt: salt,
       });
 
-      // TODO => Saving the user to the DB
+      // SAVE USER TO DB
       await newUser.save();
 
       res.status(200).json({
@@ -55,7 +55,7 @@ router.post("/user/signup", async (req, res) => {
       res.status(409).json({ message: "This email already exists" });
     }
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 });
 
