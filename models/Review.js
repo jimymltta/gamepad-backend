@@ -5,6 +5,7 @@ const Review = mongoose.model("Review", {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  game: String,
   title: String,
   text: String,
 });

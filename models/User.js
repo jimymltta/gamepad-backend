@@ -11,6 +11,8 @@ const User = mongoose.model("User", {
       type: String,
     },
   },
+  favs: [],
+  reviews: [],
   token: String,
   hash: String,
   salt: String,

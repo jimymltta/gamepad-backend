@@ -41,7 +41,7 @@ router.post("/user/signup", async (req, res) => {
       });
 
       // TODO => Saving the user to the DB
-      //await newUser.save(
+      await newUser.save();
 
       res.status(200).json({
         _id: newUser._id,
@@ -78,5 +78,60 @@ router.post("/user/login", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+// ROUTE 3 => ADD A FAVORITE
+router.post("/user/addFavorite", isAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findOne({ token: req.fields.token });
+    if (user) {
+      for (let i = 0; i < user.favs.length; i++) {
+        if (user.favs[i].id === req.fiels.game.id) {
+          return res
+            .status(400)
+            .json({ message: "This game is already in your collection" });
+        }
+      }
+      user.favs.push(req.fields.game);
+      await user.save();
+      res
+        .status(200)
+        .json({ message: "Game succesfully added to your collection" });
+    } else {
+      res.status(401).json({
+        message: "You need to be logged in to add a game to your collection",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// ROUTE 4 => REMOVE A FAVORITE
+router.post("/user/removeFavorite", isAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findOne({ token: req.fields.token });
+    for (let i = 0; user.favs.length; i++) {
+      if (user.favs[i].id === req.fields.game.id) {
+        user.favs.splice(i, 1);
+      }
+    }
+    await user.save();
+    res
+      .status(200)
+      .json({ message: "Game successfully deleted from your collection" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// ROUTE 5 => SHOW THE COLLECTION
+// router.get("/user/favs", isAuthenticated, (req, res) => {
+//   try {
+//     const user = await User.findOne({token: req.fields.token});
+
+//   } catch (error) {
+//     res.status(400).json({message: error.message})
+//   }
+// })
 
 module.exports = router;
