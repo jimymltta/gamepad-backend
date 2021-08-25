@@ -126,14 +126,18 @@ router.post("/user/removeFavorite", isAuthenticated, async (req, res) => {
   }
 });
 
-// ROUTE 5 => SHOW THE COLLECTION
-// router.get("/user/favs", isAuthenticated, (req, res) => {
-//   try {
-//     const user = await User.findOne({token: req.fields.token});
-
-//   } catch (error) {
-//     res.status(400).json({message: error.message})
-//   }
-// })
+//ROUTE 5 => SHOW USER'S FAVORITES COLLECTION
+router.get("/user/favs", isAuthenticated, (req, res) => {
+  try {
+    const user = await User.findById(req.user);
+    if (user) {
+      res.status(200).json(user.favs);
+    } else {
+      res.status(400).json({ message: "This user doesn't exist" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 module.exports = router;
