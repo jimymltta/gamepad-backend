@@ -127,7 +127,7 @@ router.post("/user/removeFavorite", isAuthenticated, async (req, res) => {
 });
 
 //ROUTE 5 => SHOW USER'S FAVORITES COLLECTION
-router.get("/user/favs", isAuthenticated, (req, res) => {
+router.get("/user/favs", isAuthenticated, async (req, res) => {
   try {
     const user = await User.findById(req.user);
     if (user) {
